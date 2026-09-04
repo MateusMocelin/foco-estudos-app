@@ -1,0 +1,16 @@
+{
+  "name": "Foco Estudos",
+  "short_name": "Foco",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fbfbfe",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "icone.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

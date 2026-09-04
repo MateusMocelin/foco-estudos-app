@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4f46e5">
+<title>Foco Estudos</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="carregando" class="centro">
+  <p>Carregando…</p>
+</div>
+
+<section id="login" class="centro" hidden>
+  <div class="cartao-login">
+    <h1>Foco Estudos</h1>
+    <p>Entre com a mesma conta Google que você usa no aplicativo do celular.
+       Suas matérias e sessões aparecem aqui automaticamente.</p>
+    <button id="btn-entrar" class="principal">Entrar com Google</button>
+    <p id="erro-login" class="erro" hidden></p>
+  </div>
+</section>
+
+<div id="app" hidden>
+  <header>
+    <strong>Foco Estudos</strong>
+    <nav>
+      <button data-aba="painel" class="ativa">Painel</button>
+      <button data-aba="sessoes">Sessões</button>
+      <button data-aba="materias">Matérias</button>
+      <button data-aba="cronometro">Cronômetro</button>
+    </nav>
+    <div class="conta">
+      <span id="email"></span>
+      <button id="btn-sair" class="link">Sair</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="aba-painel">
+      <div class="cartoes">
+        <div class="cartao"><span>Hoje</span><strong id="k-hoje">—</strong></div>
+        <div class="cartao"><span>Esta semana</span><strong id="k-semana">—</strong></div>
+        <div class="cartao"><span>Total acumulado</span><strong id="k-total">—</strong></div>
+        <div class="cartao"><span>Páginas lidas</span><strong id="k-paginas">—</strong>
+          <small id="k-ritmo"></small></div>
+        <div class="cartao"><span>Questões</span><strong id="k-questoes">—</strong>
+          <small id="k-acerto"></small></div>
+      </div>
+
+      <div class="bloco">
+        <h2>Últimos 14 dias</h2>
+        <div id="grafico" class="grafico"></div>
+      </div>
+
+      <div class="bloco">
+        <h2>Metas da semana</h2>
+        <div id="metas"></div>
+      </div>
+
+      <div class="bloco">
+        <h2>Por matéria</h2>
+        <div id="por-materia"></div>
+      </div>
+    </section>
+
+    <section id="aba-sessoes" hidden>
+      <div class="barra">
+        <select id="filtro-materia"><option value="">Todas as matérias</option></select>
+        <button id="btn-nova-sessao" class="principal">Registrar sessão</button>
+      </div>
+      <div id="lista-sessoes"></div>
+    </section>
+
+    <section id="aba-materias" hidden>
+      <div class="barra">
+        <button id="btn-nova-materia" class="principal">Nova matéria</button>
+      </div>
+      <div id="lista-materias"></div>
+    </section>
+
+    <section id="aba-cronometro" hidden>
+      <div class="bloco cronometro">
+        <select id="crono-materia"></select>
+        <div id="crono-tempo" class="tempo">00:00</div>
+        <div class="crono-botoes">
+          <button id="crono-iniciar" class="principal">Iniciar</button>
+          <button id="crono-pausar" hidden>Pausar</button>
+          <button id="crono-finalizar" hidden>Finalizar</button>
+        </div>
+        <!--
+          Estes blocos não podem ser <label>: o navegador encaminha qualquer
+          clique dentro de um label para o primeiro controle que ele contém, e
+          clicar no número acabava registrando uma resposta errada.
+        -->
+        <div class="contadores">
+          <div class="contador">
+            <span>Páginas</span>
+            <div class="passo">
+              <button data-passo="paginas" data-delta="-1">−</button>
+              <output id="crono-paginas">0</output>
+              <button data-passo="paginas" data-delta="1">+</button>
+            </div>
+          </div>
+          <div class="contador">
+            <span>Questões</span>
+            <div class="passo">
+              <button id="crono-errei">Errei</button>
+              <output id="crono-questoes">0 / 0</output>
+              <button id="crono-acertei">Acertei</button>
+            </div>
+          </div>
+        </div>
+        <p class="aviso">O tempo é calculado pelo relógio do sistema, então continua
+           correto mesmo com esta aba em segundo plano.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog id="modal">
+  <form method="dialog" id="modal-form">
+    <h2 id="modal-titulo"></h2>
+    <div id="modal-campos"></div>
+    <menu>
+      <button value="cancelar">Cancelar</button>
+      <button value="ok" class="principal" id="modal-ok">Salvar</button>
+    </menu>
+  </form>
+</dialog>
+
+<div id="aviso" class="aviso-flutuante" hidden></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

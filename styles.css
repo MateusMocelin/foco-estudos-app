@@ -1,0 +1,132 @@
+:root {
+  color-scheme: light dark;
+  --fundo: #fbfbfe;
+  --superficie: #ffffff;
+  --borda: #e3e3ec;
+  --texto: #1b1b21;
+  --suave: #5c5c6b;
+  --primaria: #4f46e5;
+  --primaria-texto: #ffffff;
+  --erro: #dc2626;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #131318;
+    --superficie: #1c1c23;
+    --borda: #2f2f3a;
+    --texto: #eceaf4;
+    --suave: #a5a3b3;
+    --primaria: #a5b4fc;
+    --primaria-texto: #1e1b4b;
+    --erro: #fca5a5;
+  }
+}
+
+* { box-sizing: border-box; }
+
+/*
+ * Sem isto o atributo hidden não funciona em elementos que têm display
+ * definido no CSS: estilo do autor vence a regra [hidden]{display:none} do
+ * navegador, e a tela de carregamento nunca sairia da frente.
+ */
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.centro { display: grid; place-items: center; min-height: 100vh; padding: 24px; }
+.cartao-login {
+  background: var(--superficie); border: 1px solid var(--borda); border-radius: 16px;
+  padding: 32px; max-width: 420px; text-align: center;
+}
+.cartao-login h1 { margin: 0 0 12px; font-size: 26px; }
+.cartao-login p { color: var(--suave); }
+
+button {
+  font: inherit; padding: 9px 16px; border-radius: 9px; cursor: pointer;
+  border: 1px solid var(--borda); background: var(--superficie); color: var(--texto);
+}
+button:hover { border-color: var(--primaria); }
+button.principal { background: var(--primaria); color: var(--primaria-texto); border-color: transparent; }
+button.link { border: none; background: none; color: var(--suave); padding: 4px 8px; }
+button:disabled { opacity: .5; cursor: default; }
+
+header {
+  display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+  padding: 12px 20px; border-bottom: 1px solid var(--borda); background: var(--superficie);
+  position: sticky; top: 0; z-index: 5;
+}
+header nav { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+header nav button { border: none; background: none; color: var(--suave); }
+header nav button.ativa { color: var(--primaria); font-weight: 600; }
+.conta { display: flex; align-items: center; gap: 8px; color: var(--suave); font-size: 13px; }
+
+main { max-width: 960px; margin: 0 auto; padding: 20px; }
+
+.cartoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.cartao {
+  background: var(--superficie); border: 1px solid var(--borda);
+  border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 2px;
+}
+.cartao span { color: var(--suave); font-size: 12px; }
+.cartao strong { font-size: 24px; font-weight: 600; }
+.cartao small { color: var(--suave); font-size: 12px; }
+
+.bloco {
+  background: var(--superficie); border: 1px solid var(--borda);
+  border-radius: 12px; padding: 16px; margin-top: 16px;
+}
+.bloco h2 { margin: 0 0 14px; font-size: 15px; }
+
+.grafico { display: flex; align-items: flex-end; gap: 6px; height: 160px; }
+.grafico .dia { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; }
+.grafico .barra-area { flex: 1; width: 100%; display: flex; align-items: flex-end; }
+.grafico .barra { width: 100%; background: var(--primaria); border-radius: 5px 5px 0 0; min-height: 3px; }
+.grafico .rotulo { font-size: 10px; color: var(--suave); margin-top: 6px; }
+
+.linha {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid var(--borda);
+}
+.linha:last-child { border-bottom: none; }
+.ponto { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+.cresce { flex: 1; min-width: 0; }
+.sub { color: var(--suave); font-size: 13px; }
+.progresso { height: 7px; background: var(--borda); border-radius: 4px; overflow: hidden; margin-top: 6px; }
+.progresso > div { height: 100%; border-radius: 4px; }
+
+.barra { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+select, input, textarea {
+  font: inherit; padding: 9px 10px; border-radius: 9px;
+  border: 1px solid var(--borda); background: var(--superficie); color: var(--texto);
+}
+.cronometro { text-align: center; }
+.tempo { font-size: 60px; font-weight: 300; font-variant-numeric: tabular-nums; margin: 18px 0 6px; }
+.crono-botoes { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+.contadores { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+.contador { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--suave); }
+.passo { display: flex; align-items: center; gap: 8px; }
+.passo output { font-size: 20px; min-width: 70px; color: var(--texto); }
+.aviso { color: var(--suave); font-size: 12px; margin-top: 18px; }
+.erro { color: var(--erro); }
+.vazio { color: var(--suave); text-align: center; padding: 28px 0; }
+
+dialog { border: 1px solid var(--borda); border-radius: 14px; background: var(--superficie);
+  color: var(--texto); padding: 20px; max-width: 420px; width: calc(100% - 32px); }
+dialog::backdrop { background: rgba(0,0,0,.45); }
+dialog h2 { margin: 0 0 14px; font-size: 17px; }
+dialog label, dialog .campo { display: block; margin-bottom: 12px; font-size: 13px; color: var(--suave); }
+dialog label input, dialog label select, dialog label textarea { width: 100%; margin-top: 4px; }
+dialog menu { display: flex; gap: 8px; justify-content: flex-end; padding: 0; margin: 18px 0 0; }
+.cores { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.cores button { width: 30px; height: 30px; border-radius: 50%; padding: 0; border: 2px solid transparent; }
+.cores button[aria-pressed="true"] { border-color: var(--texto); }
+
+.aviso-flutuante {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+  background: var(--texto); color: var(--fundo); padding: 10px 16px;
+  border-radius: 10px; font-size: 14px; z-index: 10;
+}
